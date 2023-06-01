@@ -1,10 +1,5 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const Database = require("./configs/Database");
-const path = require('path')
-const multer = require('multer')
-const fs = require('fs')
-
 const cors = require("cors");
 require("dotenv/config");
 const app = express();
@@ -15,9 +10,6 @@ app.use("/images",express.static('uploads'))
 //middleware
 app.use(bodyParser.json());
 app.use(cors());
-app.options("*", cors());
-
-//routes
 
 const usersRoute = require("./routes/Users");
 const booksRoute = require("./routes/Books");
@@ -64,7 +56,6 @@ app.post("/api/upload", upload.single("avatar"), async (req, res) => {
       })
   })
 });
-
 
 app.listen(3000, function () {
   const db = new Database();
